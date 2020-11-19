@@ -3,8 +3,8 @@ import socket
 #Примечание: данный скрипт является очень простым, поэтому не поддерживает работу в браузере
 #Запуск серверного сокета: python Lab_sockets.py
 #Запуск клиентского сокета:
-#Linux/BSD: nc localhost 1035
-#Скачиваем "WireShark" или другую сетевую утилиту
+#Linux/BSD/MacOS: nc localhost 1035
+#Windows: Скачиваем "WireShark" или другую сетевую утилиту
 #Команда "who" возвращает информацию о варианте и студенте и не принимает никаких параметров
 #Команда "find" принимает два параметра: искомую часть строки и имя файла, в которм строка будет искаться
 
@@ -37,18 +37,17 @@ while True:
         if not request:
             break
         else:
-            if 'who' in request:
-                response = 'Вариант №10, Контекстный поиск в файле(ах), Илья Каплан'.encode()
-            elif 'find' in request:
-                response = ''
+            if 'who'.encode() in request:
+                response = 'Вариант №10, Контекстный поиск в файле(ах), Илья Каплан\n'.encode()
+            elif 'find'.encode() in request:
+                response = ''.encode()
                 _, string, filename = request.split()
-                with open(filename) as file:
+                with open(filename.decode('utf-8')) as file:
                     for line in file.readlines():
-                        if string.encode() in line.encode():
-                            response += line
-                response.encode()
+                        if string in line.encode():
+                            response += f'{line}\n'.encode()
             else:
-                response = 'Неизвестная команда'.encode()
+                response = 'Неизвестная команда\n'.encode()
             client_socket.send(response)
         #################################
 #################################
