@@ -43,9 +43,9 @@ while True:
                 response = ''.encode()
                 _, string, filename = request.split()
                 with open(filename.decode('utf-8')) as file:
-                    for line in file.readlines():
+                    for i, line in enumerate(file.readlines()):
                         if string in line.encode():
-                            response += f'{line}\n'.encode()
+                            response += f'line {i + 1}: {line}\n'.encode()
             else:
                 response = 'Неизвестная команда\n'.encode()
             client_socket.send(response)
