@@ -45,7 +45,7 @@ while True:
                 with open(filename.decode('utf-8')) as file:
                     for i, line in enumerate(file.readlines()):
                         if string in line.encode():
-                            response += f'line {i + 1}: {line}\n'.encode()
+                            response += f'line {i + 1}: {line}'.encode()
             else:
                 response = 'Неизвестная команда\n'.encode()
             client_socket.send(response)
