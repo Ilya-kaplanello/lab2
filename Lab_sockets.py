@@ -25,7 +25,7 @@ server_socket.listen()
 #################################
 while True:
     print('Waiting for connection')
-    client_socket, addr = server_socket.accept() #Инициальзация клиентского сокета
+    client_socket, addr = server_socket.accept() #Инициализация клиентского сокета
     print('Connection form', addr)
 
     while True:
